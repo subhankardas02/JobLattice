@@ -1,0 +1,293 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap');
+
+/* ─── Tokens ─── */
+:root {
+  --bg:            #060C1A;
+  --card-bg:       rgba(10, 17, 35, 0.88);
+  --accent:        #5B5FEF;
+  --accent-light:  #818CF8;
+  --accent-glow:   rgba(91, 95, 239, 0.38);
+  --purple:        #A78BFA;
+  --text-primary:  #EEF2FF;
+  --text-muted:    #7B84A3;
+  --border:        rgba(91, 95, 239, 0.22);
+  --input-bg:      rgba(8, 14, 30, 0.65);
+  --radius-card:   20px;
+  --radius-input:  11px;
+  --font-display:  'Plus Jakarta Sans', sans-serif;
+  --font-body:     'DM Sans', sans-serif;
+}
+
+/* ─── Reset ─── */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ─── Body: signature lattice grid ─── */
+body {
+  min-height: 100vh;
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(rgba(91, 95, 239, 0.09) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(91, 95, 239, 0.09) 1px, transparent 1px),
+    linear-gradient(rgba(91, 95, 239, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(91, 95, 239, 0.04) 1px, transparent 1px);
+  background-size: 80px 80px, 80px 80px, 20px 20px, 20px 20px;
+  background-position: -1px -1px, -1px -1px, -1px -1px, -1px -1px;
+  font-family: var(--font-body);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Ambient radial glow behind the card */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 700px 500px at 50% 50%, rgba(91, 95, 239, 0.12) 0%, transparent 70%),
+    radial-gradient(ellipse 400px 300px at 80% 20%, rgba(167, 139, 250, 0.07) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── Card ─── */
+.form-container {
+  position: relative;
+  z-index: 1;
+  width: min(460px, 100%);
+  background: var(--card-bg);
+  backdrop-filter: blur(24px) saturate(150%);
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  padding: 48px 44px 44px;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.04) inset,
+    0 2px 4px rgba(0, 0, 0, 0.3),
+    0 20px 60px rgba(0, 0, 0, 0.55),
+    0 0 80px rgba(91, 95, 239, 0.08);
+}
+
+/* Animated shimmer top border */
+.form-container::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--accent) 25%,
+    var(--purple) 50%,
+    var(--accent-light) 75%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  border-radius: var(--radius-card) var(--radius-card) 0 0;
+  animation: shimmer 3.5s linear infinite;
+}
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ─── Headings ─── */
+h1 {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.6px;
+  line-height: 1.2;
+  margin-bottom: 6px;
+  background: linear-gradient(135deg, var(--text-primary) 40%, var(--accent-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+h2 {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-muted);
+  letter-spacing: 0.1px;
+  margin-bottom: 38px;
+}
+
+/* ─── Form table layout ─── */
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+tr {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+tr:last-child {
+  margin-bottom: 0;
+  margin-top: 8px;
+}
+
+/* ─── Labels ─── */
+label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  display: block;
+}
+
+/* ─── Inputs ─── */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  background: var(--input-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-input);
+  padding: 13px 16px;
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 14.5px;
+  font-weight: 400;
+  outline: none;
+  transition: border-color 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
+  display: block;
+}
+
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+input[type="password"]::placeholder {
+  color: rgba(123, 132, 163, 0.45);
+}
+
+input[type="text"]:hover,
+input[type="email"]:hover,
+input[type="password"]:hover {
+  border-color: rgba(91, 95, 239, 0.4);
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+  border-color: var(--accent);
+  background: rgba(91, 95, 239, 0.07);
+  box-shadow: 0 0 0 3.5px var(--accent-glow);
+}
+
+/* ─── Submit button ─── */
+.btn-submit {
+  width: 100%;
+  padding: 14px 20px;
+  background: linear-gradient(135deg, var(--accent) 0%, #7C5FEF 50%, var(--purple) 100%);
+  background-size: 200% 200%;
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  border: none;
+  border-radius: var(--radius-input);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow:
+    0 4px 18px rgba(91, 95, 239, 0.45),
+    0 1px 3px rgba(0, 0, 0, 0.3);
+  animation: gradient-shift 4s ease infinite;
+}
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50%       { background-position: 100% 50%; }
+}
+
+.btn-submit:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 8px 28px rgba(91, 95, 239, 0.55),
+    0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.btn-submit:active {
+  transform: translateY(0px) scale(0.99);
+  box-shadow: 0 3px 12px rgba(91, 95, 239, 0.4);
+}
+
+/* ─── Sign-in redirect ─── */
+.login-redirect {
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(91, 95, 239, 0.12);
+  text-align: center;
+}
+
+.login-redirect p {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.login-redirect a {
+  color: var(--accent-light);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s;
+  position: relative;
+}
+
+.login-redirect a::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0; right: 0;
+  height: 1px;
+  background: var(--accent-light);
+  transform: scaleX(0);
+  transition: transform 0.2s ease;
+  transform-origin: left;
+}
+
+.login-redirect a:hover {
+  color: var(--purple);
+}
+
+.login-redirect a:hover::after {
+  transform: scaleX(1);
+  background: var(--purple);
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 500px) {
+  .form-container {
+    padding: 36px 24px 32px;
+  }
+
+  h1 { font-size: 22px; }
+  h2 { font-size: 13px; margin-bottom: 30px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .form-container::before,
+  .btn-submit {
+    animation: none;
+  }
+
+  .btn-submit {
+    background-position: 0% 50%;
+  }
+}
