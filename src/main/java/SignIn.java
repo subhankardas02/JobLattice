@@ -57,12 +57,12 @@ public class SignIn extends HttpServlet {
                 String name=(String) rs.getString("user_name");
                 HttpSession session = request.getSession();
                 session.setAttribute("userEmail", email);
-                request.setAttribute("username", name);
+                session.setAttribute("username", name);
                 
                 // 3. Forward the request and response to Servlet B
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/WebPage");
-                dispatcher.forward(request, response);
-                
+//                RequestDispatcher dispatcher = request.getRequestDispatcher("/WebPage");
+//                dispatcher.forward(request, response);
+                response.sendRedirect(request.getContextPath() + "/HomePage");
                 // Redirect user to your main page (adjust filename if necessary)
 //                response.sendRedirect("main_page.jsp");
             } else {

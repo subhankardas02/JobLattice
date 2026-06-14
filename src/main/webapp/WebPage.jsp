@@ -104,7 +104,7 @@
     </style>
 </head>
 <body>
-	<h1>Web Page Loaded</h1>
+	<h1>Welcome, ${username}</h1>
     <div class="header">
         <h1>Discover Opportunities</h1>
         <p style="color: var(--text-sub);">Find your next big role below</p>

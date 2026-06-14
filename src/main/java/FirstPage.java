@@ -50,11 +50,16 @@ public class FirstPage extends HttpServlet {
              // 1. Create the data you want to pass (can be any Object)
                 
                 // 2. Attach the data to the request object
-                request.setAttribute("username", name);
+             // 1. Store data in the Session (persists across multiple requests)
+                request.getSession().setAttribute("username", name);
+                
+                // 2. Tell the browser to make a new request to /WebPage
+                response.sendRedirect(request.getContextPath() + "/WebPage");
+//                request.setAttribute("username", name);
                 
                 // 3. Forward the request and response to Servlet B
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/WebPage");
-                dispatcher.forward(request, response);
+//                RequestDispatcher dispatcher = request.getRequestDispatcher("/WebPage");
+//                dispatcher.forward(request, response);
 
 //                response.getWriter().println(
 //                        "<h2>Registration Successful!</h2>");
