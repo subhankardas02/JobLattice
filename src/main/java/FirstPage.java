@@ -54,7 +54,7 @@ public class FirstPage extends HttpServlet {
                 request.getSession().setAttribute("username", name);
                 
                 // 2. Tell the browser to make a new request to /WebPage
-                response.sendRedirect(request.getContextPath() + "/WebPage");
+                response.sendRedirect(request.getContextPath() + "/HomePage");
 //                request.setAttribute("username", name);
                 
                 // 3. Forward the request and response to Servlet B
